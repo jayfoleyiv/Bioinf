@@ -1,0 +1,88 @@
+from xlrd import open_workbook
+from random import randint
+import scipy
+from scipy.stats import pearsonr
+import sys
+
+if len(sys.argv) < 2:
+	print "You must pass a data file like so: python geo.py12 <data file>"
+	sys.exit()
+
+# Opens an "xlsx" file given by the user
+workbook = open_workbook(sys.argv[1])
+
+# Use sheet index 1 because index 0 are Annotations
+worksheet = workbook.sheet_by_index(0)
+
+# Declare and instantiate arrays that will hold expression profiles
+first_array = []
+second_array = []
+
+# Maintain list of pcc and p values to compute mean
+pcc_values = []
+p_values = []
+
+#Holds Gene names?
+gene_one = []
+gene_two = []
+
+# List of valid columns to pull data from
+EXPRESSION_PROFILE_COLUMNS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+GENE_Name = 14
+FIRST_ROW_IN_SHEET = 5
+TOTAL_ITERATIONS = 100000
+
+# Row "A" to compare against all other rows
+STATIC_ROW = 6
+
+# Function to return list of values in a given row
+def get_array_from_row(row):
+	new_array = []
+
+	for col in EXPRESSION_PROFILE_COLUMNS:
+		try:
+			new_array.append(worksheet.cell(row, col).value)
+		except:
+			print "[" + str(row) + ", " + str(col) + "] [row, col] is invalid." 
+			return None
+
+	return new_array
+
+
+# Computes mean given an array of values
+def mean(array):
+	total = 0
+	for value in array:
+		total += value
+
+	return total / len(array)
+
+# Loops X times
+for count in range(1, TOTAL_ITERATIONS):
+	try:
+		random_row = randint(FIRST_ROW_IN_SHEET, worksheet.nrows - 1)
+		random_row2 = randint(FIRST_ROW_IN_SHEET, worksheet.nrows - 1)
+		first_array = get_array_from_row(random_row)
+		second_array = get_array_from_row(random_row2)
+		gene_1 = worksheet.cell(rowx=random_row, colx=14)
+		gene_2 = worksheet.cell(rowx=random_row2, colx=14)
+		
+		if first_array is None or second_array is None:
+			raise
+
+		pcc, p_value = pearsonr(first_array, second_array)
+		
+		
+		#print pcc
+		pcc_values.append(pcc)
+		p_values.append(p_value)
+		gene_one.append(gene_1)
+		gene_two.append(gene_2)
+	except:
+		TOTAL_ITERATIONS += 0
+		pass
+
+print "PCC: " + str(pcc_values)
+print "p-value: " + str(p_values)
+print "Gene1 is" + str(gene_one)
+print "Gene2 is" + str(gene_two)
