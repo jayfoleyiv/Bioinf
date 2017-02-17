@@ -30,7 +30,7 @@ int main() {
 
   G  = (double *) malloc(8*10000*sizeof(double));
   line = (char *) malloc(10000*sizeof(char));
-  fp = fopen("Data_Try_Small_Subset.txt","r");
+  fp = fopen("../DATA_FILES/Data_Try_Small_Subset.txt","r");
 
 
   // Just reading the data here!
