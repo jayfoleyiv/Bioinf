@@ -67,37 +67,45 @@ int main() {
  double bin[] = {-0.9, -0.8, -0.7, -0.6, -0.5, -0.4, -0.3, -0.2, -0.1, 0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.1 };
  double f[] = {0.0, 00.0, 0.0, 00.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
 
-
- for (i=0; i<10000; i++) {
+ // Using a while loop because we want to make sure
+ // we aren't comparing the same vectors in the analysis... 
+ int pcc_count = 0;
+ while (pcc_count<10000) {
+ //for (i=0; i<10000; i++) {
 
    int ri = rand() % N;
    int rj = rand() % N;
 
-   double P = S_X_Y( ri, rj, G);
-   printf("  PC between %i and %i is %f\n",ri,rj,P);
+   if (ri != rj) {
 
-   int j=0; 
-   int die = 1;
-   do {
+     double P = S_X_Y( ri, rj, G);
+     printf("  PC between %i and %i is %f\n",ri,rj,P);
 
-     if (bin[j]>P) {
+     int j=0; 
+     int die = 1;
+     do {
 
-       die=0;
-       f[j] += 1;  
+       if (bin[j]>P) {
+
+         die=0;
+         f[j] += 1;  
   
-     }
+       }
 
-     else if (j==19) {
+       else if (j==19) {
  
-       die = 0;
-       f[j] += 1;
+         die = 0;
+         f[j] += 1;
 
-     }
+       }
 
-     j++;
+       j++;
 
-   }while(die);
+     }while(die);
 
+   pcc_count++;
+
+   }
 
  }
  
@@ -139,19 +147,24 @@ int main() {
 
 }
 
+
 double PhiG(int idx, double *G) {
   int i;
   double Goffset = G[idx*7];
   double diff, sum;
 
+  printf("  Goffset is %f\n",Goffset);
+  sum = 0.;
   for (i=1; i<7; i++) {
-   
+  
     diff = G[idx*7+i] - Goffset;
+    printf("  diff is %f\n",diff);
     diff *= diff;
     sum += diff;
   }
 
-  return sqrt(sum/6);
+  printf("  phi is %f\n",sum/6.);
+  return sqrt(sum/6.);
 
 }
 
@@ -177,5 +190,5 @@ double S_X_Y(int idx, int jidx, double *G) {
 
   }
 
-  return sum/6;
+  return sum/6.;
 }
