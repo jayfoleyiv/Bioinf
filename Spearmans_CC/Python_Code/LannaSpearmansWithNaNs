@@ -13,6 +13,7 @@ class PairedGene(object):
 from random import randint
 from scipy import stats
 import pandas as pd
+import math
 
 print('I will calculate spearmans cc for you!')
 print()
@@ -45,10 +46,18 @@ if calctype == 'all':
             print(gene2)
             if gene1[0]+ gene2[0] not in genesUsed:
                 if gene1[0] != gene2[0]:
+                    k = 1
+                    gene1a = list(gene1)
+                    gene2a = list(gene2)
+                    while k < len(gene1):
+                        if math.isnan(float(gene1[k])) == True or math.isnan(float(gene2[k])) == True:
+                            gene1a[k] = math.nan
+                            gene2a[k] = math.nan
+                        k += 1
                     pairedGene = PairedGene()
-                    pairedGene.stats = stats.spearmanr(gene1[1:len(gene1)], gene2[1:len(gene2)], nan_policy = 'omit')
+                    pairedGene.stats = stats.spearmanr(gene1a[1:len(gene1a)], gene2a[1:len(gene2a)], nan_policy = 'omit')
                     print(pairedGene.stats)
-                    genesUsed.update ({gene1[0]+ gene2[0] : pairedGene.stats})
+                    genesUsed.update ({gene1a[0]+ gene2a[0] : pairedGene.stats})
                     calculatedGenes.append(pairedGene)
             j += 1
         i += 1
@@ -69,8 +78,16 @@ elif calctype == 'one':
                 gene2 = df.loc[i]
             
             if gene1 is not None and gene2 is not None:
+                k = 1
+                gene1a = list(gene1)
+                gene2a = list(gene2)
+                while k < len(gene1):
+                    if math.isnan(float(gene1[k])) == True or math.isnan(float(gene2[k])) == True:
+                            gene1a[k] = math.nan
+                            gene2a[k] = math.nan
+                    k += 1
                 pairedGene = PairedGene()
-                pairedGene.stats = stats.spearmanr(gene1[1:len(gene1)], gene2[1:len(gene2)], nan_policy = 'omit')
+                pairedGene.stats = stats.spearmanr(gene1a[1:len(gene1a)], gene2a[1:len(gene2a)], nan_policy = 'omit')
                 print(pairedGene.stats)
                 calculatedGenes.append(pairedGene)
                 break;
