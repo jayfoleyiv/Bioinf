@@ -152,10 +152,35 @@ print ('Workbook Made')
 #plt.show()
 output('PCC_Results.xls', 'pcc_value', pcc)
 
+
+#### Reem may modify and test for-loops, array handling, conditionals, etc below this line!
+
+
 print("Printing PCC Array\n")
 print(pcc)
+rg = len(pcc)
+print(" Printing range\n")
+print(rg)
+ 
+p=np.linspace(-1, 1, 41, endpoint=True)
+N=41
+y = np.zeros(N)
+prg = len(p)
 
-#print (histogram)
+for x in range(rg):
+    if pcc[x] < p[0] :
+        print(x)
+        print(pcc[x])
+        y[0]=y[0] + 1
+    for z in range(1, prg) :
+        if (pcc[x]>=p[z-1] and pcc[x]<p[z]) :
+            y[z]=y[z]+1
+
+print(p, y)
+
+ 
+
+#print(histogram)
 
 
 
