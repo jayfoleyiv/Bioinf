@@ -123,7 +123,7 @@ for count in range(0, Total_Iterations):
 		random_row2 = randint(First_Row_In_Sheet, worksheet.nrows - 1)
 		first_array = get_array_from_row(random_row)
 		second_array = get_array_from_row(random_row2)
-		random_row_check = random_row / random_row2
+		random_row_check = random_row == random_row2
 
 
 		if first_array is None or second_array is None:
