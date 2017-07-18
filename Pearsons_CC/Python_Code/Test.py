@@ -178,7 +178,11 @@ for x in range(rg):
 
 print(p, y)
 
- 
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
 
 #print(histogram)
 
@@ -187,5 +191,7 @@ print(p, y)
 #x = [ 0.000000, -0.128000, -0.097000, -0.020000, -0.272000, -0.198000, -0.333000]
 #y = [ 0.775000, 0.849000, 0.518000, 0.116000, -0.076000, -0.090000, 0.102000]
 #PCC(x, y)
+
+
 
 
