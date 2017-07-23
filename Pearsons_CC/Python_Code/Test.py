@@ -178,9 +178,25 @@ for x in range(rg):
 
 print(p, y)
 
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
+#import pandas as pd
+#import matplotlib.pyplot as plt
+#import plotly 
+#plotly.tools.set_credentials_file(username='Remm97', api_key='QW2rjmNs2WKSv7autD3i')
+#import plotly 
+#plotly.tools.set_config_file(world_readable=False,
+                            #sharing='secret')
+
+import xlsxwriter
+
+workbook = xlsxwriter.Workbook('histogram.xlsx')
+worksheet = workbook.add_worksheet()
+
+worksheet.write('A1', 'Hello world')
+
+#array = [[p],
+         #[y]]
+
+workbook.close()
 
 
 
