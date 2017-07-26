@@ -186,12 +186,66 @@ print(p, y)
 #plotly.tools.set_config_file(world_readable=False,
                             #sharing='secret')
 
-import xlsxwriter
+import XlsxWriter
 
-workbook = xlsxwriter.Workbook('histogram.xlsx')
+workbook = XlsxWriter.Workbook('histogram.sample.xlsx')
 worksheet = workbook.add_worksheet()
 
-worksheet.write('A1', 'Hello world')
+data = (
+
+    ['-1', 0],
+    ['-0.95', 62],
+    ['-0.90', 130],
+    ['-0.85', 91],
+    ['-0.80', 46],
+    ['-0.75', 13],
+    ['-0.70', 7],
+    ['-0.65', 4],
+    ['-0.60', 13],
+    ['-0.55', 33],
+    ['-0.50', 14],
+    ['-0.45', 18],
+    ['-0.40', 15],
+    ['-0.35', 6],
+    ['-0.30', 14],
+    ['-0.25', 5],
+    ['-0.20', 0],
+    ['-0.15', 0],
+    ['-0.10', 0],
+    ['-0.05', 0],
+    ['0', 0],
+    ['0.05', 0],
+    ['0.10', 0],
+    ['0.15', 0],
+    ['0.20', 0],
+    ['0.25', 0],
+    ['0.30', 0],
+    ['0.35', 3],
+    ['0.40', 15],
+    ['0.45', 6],
+    ['0.50', 18],
+    ['0.55', 7],
+    ['0.60', 26],
+    ['0.65', 0],
+    ['0.70', 11],
+    ['0.75', 10],
+    ['0.80', 31],
+    ['0.85', 42],
+    ['0.90', 70],
+    ['0.95', 105],
+    ['1', 122],
+)
+
+row = 0
+col = 0
+
+for item, cost in (data):
+    worksheet.write(row, col,   item)
+    worksheet.write(row, col + 1, cost)
+    row += 1
+
+worksheet.write(row, 0, 'Total Iterations')
+worksheet.write(row, 1, '=SUM(B1:B41)')
 
 #array = [[p],
          #[y]]
