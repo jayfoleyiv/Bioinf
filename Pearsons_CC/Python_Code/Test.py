@@ -186,9 +186,9 @@ print(p, y)
 #plotly.tools.set_config_file(world_readable=False,
                             #sharing='secret')
 
-import XlsxWriter
+import xlsxwriter
 
-workbook = XlsxWriter.Workbook('histogram.sample.xlsx')
+workbook = xlsxwriter.Workbook('histogram.sample.xlsx')
 worksheet = workbook.add_worksheet()
 
 data = (
@@ -238,11 +238,20 @@ data = (
 
 row = 0
 col = 0
+#for item, cost in (data):
+#    worksheet.write(row, col,   item)
+#    worksheet.write(row, col + 1, cost)
+#    row += 1
 
-for item, cost in (data):
-    worksheet.write(row, col,   item)
-    worksheet.write(row, col + 1, cost)
+for item in (y):
+    worksheet.write(row, col, item)
     row += 1
+
+row = 0
+for item in (p):
+    worksheet.write(row,col +1, item)
+    row += 1
+
 
 worksheet.write(row, 0, 'Total Iterations')
 worksheet.write(row, 1, '=SUM(B1:B41)')
