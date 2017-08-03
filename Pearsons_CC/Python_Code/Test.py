@@ -260,21 +260,21 @@ worksheet.write(row, 1, '=SUM(B1:B41)')
 #
 # Copyright 2013-2017, John McNamara, jmcnamara@cpan.org
 
-data = [
-    ['p'],
-    ['y'],
-]
+#data = [
+#    ['p'],
+#    ['y'],
+#]
 
-worksheet.write_column('A1', data[0])
-worksheet.write_column('B1', data[1])
+#worksheet.write_column('A1', data[0])
+#worksheet.write_column('B1', data[1])
 
 # Create a new chart object. In this case an embedded chart.
 chart1 = workbook.add_chart({'type': 'column'})
 
 # Configure the first series.
 chart1.add_series({
-    'values': '=Sheet1!$A$3:$A$41',
-    'number': '=Sheet1!$B$3:$B$41',
+    'values': '=Sheet1!$A$1:$A$41',
+    'number': '=Sheet1!$B$1:$B$41',
 })
 
 # Add a chart title and some axis labels.
