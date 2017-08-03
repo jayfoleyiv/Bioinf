@@ -265,8 +265,8 @@ data = [
     ['y'],
 ]
 
-worksheet.write_column('A2', data[0])
-worksheet.write_column('B2', data[1])
+worksheet.write_column('A1', data[0])
+worksheet.write_column('B1', data[1])
 
 # Create a new chart object. In this case an embedded chart.
 chart1 = workbook.add_chart({'type': 'column'})
