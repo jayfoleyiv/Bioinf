@@ -259,14 +259,12 @@ worksheet.write(row, 1, '=SUM(B1:B41)')
 # An example of creating Excel Line charts with Python and XlsxWriter.
 #
 # Copyright 2013-2017, John McNamara, jmcnamara@cpan.org
-#
-headings = ['range', 'number']
+
 data = [
     ['p'],
     ['y'],
 ]
 
-worksheet.write_row('A1', headings)
 worksheet.write_column('A2', data[0])
 worksheet.write_column('B2', data[1])
 
