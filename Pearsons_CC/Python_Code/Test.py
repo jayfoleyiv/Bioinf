@@ -273,8 +273,8 @@ chart1 = workbook.add_chart({'type': 'column'})
 
 # Configure the first series.
 chart1.add_series({
-    'values': '=Sheet1!$B$2:$B$41',
     'categories': '=Sheet1!$A$2:$A$41',
+    'values': '=Sheet1!$B$1:$B$41',
 })
 
 # Add a chart title and some axis labels.
