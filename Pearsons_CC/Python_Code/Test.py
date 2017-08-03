@@ -271,17 +271,17 @@ worksheet.write_column('A2', data[0])
 worksheet.write_column('B2', data[1])
 
 # Create a new chart object. In this case an embedded chart.
-chart1 = workbook.add_chart({'type': 'bar'})
+chart1 = workbook.add_chart({'type': 'column'})
 
 # Configure the first series.
 chart1.add_series({
-    'values': '=Sheet1!$A$2:$A$7',
-    'number': '=Sheet1!$B$2:$B$7',
+    'values': '=Sheet1!$A$3:$A$41',
+    'number': '=Sheet1!$B$3:$B$41',
 })
 
 # Add a chart title and some axis labels.
-chart1.set_title ({'name': 'Histogram of 1test'})
-chart1.set_x_axis({'name': 'PCC Value'})
+chart1.set_title ({'name': 'Histogram'})
+chart1.set_x_axis({'name': 'PCC'})
 chart1.set_y_axis({'name': 'Number of Gene Pairs'})
 
 # Set an Excel chart style. Colors with white outline and shadow.
@@ -290,7 +290,7 @@ chart1.set_style(10)
 # Insert the chart into the worksheet (with an offset).
 worksheet.insert_chart('D2', chart1, {'x_offset': 25, 'y_offset': 10})
 
-chart2 = workbook.add_chart({'type': 'bar', 'subtype': 'clustered'})
+chart2 = workbook.add_chart({'type': 'column', 'subtype': 'clustered'})
 
 workbook.close()
 
