@@ -273,7 +273,7 @@ chart1 = workbook.add_chart({'type': 'column'})
 
 # Configure the first series.
 chart1.add_series({
-    'values': '=Sheet1!$A$1:$A$41',
+    'values': '=Sheet1!$B$1:$B$41',
     'number': '=Sheet1!$B$1:$B$41',
 })
 
@@ -283,7 +283,7 @@ chart1.set_x_axis({'name': 'PCC'})
 chart1.set_y_axis({'name': 'Number of Gene Pairs'})
 
 # Set an Excel chart style. Colors with white outline and shadow.
-chart1.set_style(10)
+chart1.set_style(11)
 
 # Insert the chart into the worksheet (with an offset).
 worksheet.insert_chart('D2', chart1, {'x_offset': 25, 'y_offset': 10})
