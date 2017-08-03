@@ -260,39 +260,29 @@ worksheet.write(row, 1, '=SUM(B1:B41)')
 #
 # Copyright 2013-2017, John McNamara, jmcnamara@cpan.org
 #
-headings = ['Number', 'Batch 1', 'Batch 2']
+headings = ['range', 'number']
 data = [
-    [2, 3, 4, 5, 6, 7],
-    [10, 40, 50, 20, 10, 50],
-    [30, 60, 70, 50, 40, 30],
+    ['p'],
+    ['y'],
 ]
 
-worksheet.write_row('A1', headings, bold)
+worksheet.write_row('A1', headings)
 worksheet.write_column('A2', data[0])
 worksheet.write_column('B2', data[1])
-worksheet.write_column('C2', data[2])
 
 # Create a new chart object. In this case an embedded chart.
-chart1 = workbook.add_chart({'type': 'line'})
+chart1 = workbook.add_chart({'type': 'bar'})
 
 # Configure the first series.
 chart1.add_series({
-    'name':       '=Sheet1!$B$1',
-    'categories': '=Sheet1!$A$2:$A$7',
-    'values':     '=Sheet1!$B$2:$B$7',
-})
-
-# Configure second series. Note use of alternative syntax to define ranges.
-chart1.add_series({
-    'name':       ['Sheet1', 0, 2],
-    'categories': ['Sheet1', 1, 0, 6, 0],
-    'values':     ['Sheet1', 1, 2, 6, 2],
+    'values': '=Sheet1!$A$2:$A$7',
+    'number': '=Sheet1!$B$2:$B$7',
 })
 
 # Add a chart title and some axis labels.
 chart1.set_title ({'name': 'Histogram of 1test'})
-chart1.set_x_axis({'name': 'Test number'})
-chart1.set_y_axis({'name': 'Sample length (mm)'})
+chart1.set_x_axis({'name': 'PCC Value'})
+chart1.set_y_axis({'name': 'Number of Gene Pairs'})
 
 # Set an Excel chart style. Colors with white outline and shadow.
 chart1.set_style(10)
@@ -300,6 +290,7 @@ chart1.set_style(10)
 # Insert the chart into the worksheet (with an offset).
 worksheet.insert_chart('D2', chart1, {'x_offset': 25, 'y_offset': 10})
 
+chart2 = workbook.add_chart({'type': 'bar', 'subtype': 'clustered'})
 
 workbook.close()
 
