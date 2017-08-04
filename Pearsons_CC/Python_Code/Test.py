@@ -30,6 +30,9 @@ expression_col_b = list(expression_col_a)
 Expression_Profile_Columns = expression_col_b
 Total_Iteration_Question = input('How many itterations would you like to run?: ')
 Total_Iteration_a = int(Total_Iteration_Question)
+debug_output_printing_q = input('Do you want to print EVERY PCC VALUE to an excel file? (Hint:  type 0 if you are doing greater than 65,000 comparison, type 1 for yes) ')
+debug_output_printing = int(debug_output_printing_q)
+
 # Second array value can not be zero for some reason. So instruct user that profile must start on second row
 First_Row_In_Sheet = 1
 Total_Iterations = Total_Iteration_a
@@ -154,7 +157,9 @@ print ("Skipped Itterations: " + str(len(repeat)))
 print ('Workbook Made')
 #histogram = plt.hist(pcc, bins= 100)
 #plt.show()
-output('PCC_Results.xls', 'pcc_value', pcc)
+
+if (debug_output_printing==1):
+    output('PCC_Results.xlsx', 'pcc_value', pcc)
 
 
 #### Reem may modify and test for-loops, array handling, conditionals, etc below this line!
