@@ -10,7 +10,9 @@ if len(sys.argv) < 2:
 	print ("You must pass a data file like so: python geo.pyworks1 <data file>")
 	sys.exit()
 workbook = open_workbook(sys.argv[1])
-worksheet = workbook.sheet_by_index(0)
+wsindex_question = input('Which sheet would you like to use?  (0 -> first sheet, 1 -> second sheet, etc) ')
+wsindex = int(wsindex_question) 
+worksheet = workbook.sheet_by_index(wsindex)
 first_array = []
 second_array = []
 pcc = []
@@ -21,7 +23,9 @@ gene_name_question = input('What column are the gene names under: ')
 gene_name_col = int(gene_name_question)
 expression_col_question = input('How many time-points are there?: ')
 expression_col = int(expression_col_question)
-expression_col_a = range(0, expression_col)
+data_col_start_question = input('What is the column number where the data starts?  (A -> 0, B -> 1, etc) ')
+data_col_start = int(data_col_start_question)
+expression_col_a = range(data_col_start, expression_col)
 expression_col_b = list(expression_col_a)
 Expression_Profile_Columns = expression_col_b
 Total_Iteration_Question = input('How many itterations would you like to run?: ')
