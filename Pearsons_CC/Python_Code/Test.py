@@ -131,7 +131,7 @@ for count in range(0, Total_Iterations):
 
 		random_row = randint(First_Row_In_Sheet, worksheet.nrows - 1)
                 first_array = get_array_from_row(random_row)
- 
+                print(adj_genepair_a) 
                 for gcount in range(0,adj_genepair_a):
          		random_row2 = randint(First_Row_In_Sheet, worksheet.nrows - 1)
                         twogene[gcount] = random_row2
@@ -194,63 +194,12 @@ for x in range(rg):
 
 print(p, y)
 
-#import pandas as pd
-#import matplotlib.pyplot as plt
-#import plotly 
-#plotly.tools.set_credentials_file(username='Remm97', api_key='QW2rjmNs2WKSv7autD3i')
-#import plotly 
-#plotly.tools.set_config_file(world_readable=False,
-                            #sharing='secret')
+
 
 import xlsxwriter
 
 workbook = xlsxwriter.Workbook('histogram.sample.xlsx')
 worksheet = workbook.add_worksheet()
-
-data = (
-
-    ['-1', 0],
-    ['-0.95', 62],
-    ['-0.90', 130],
-    ['-0.85', 91],
-    ['-0.80', 46],
-    ['-0.75', 13],
-    ['-0.70', 7],
-    ['-0.65', 4],
-    ['-0.60', 13],
-    ['-0.55', 33],
-    ['-0.50', 14],
-    ['-0.45', 18],
-    ['-0.40', 15],
-    ['-0.35', 6],
-    ['-0.30', 14],
-    ['-0.25', 5],
-    ['-0.20', 0],
-    ['-0.15', 0],
-    ['-0.10', 0],
-    ['-0.05', 0],
-    ['0', 0],
-    ['0.05', 0],
-    ['0.10', 0],
-    ['0.15', 0],
-    ['0.20', 0],
-    ['0.25', 0],
-    ['0.30', 0],
-    ['0.35', 3],
-    ['0.40', 15],
-    ['0.45', 6],
-    ['0.50', 18],
-    ['0.55', 7],
-    ['0.60', 26],
-    ['0.65', 0],
-    ['0.70', 11],
-    ['0.75', 10],
-    ['0.80', 31],
-    ['0.85', 42],
-    ['0.90', 70],
-    ['0.95', 105],
-    ['1', 122],
-)
 
 row = 0
 col = 0
@@ -275,14 +224,6 @@ worksheet.write(row, 1, '=SUM(B1:B41)')
 # An example of creating Excel Line charts with Python and XlsxWriter.
 #
 # Copyright 2013-2017, John McNamara, jmcnamara@cpan.org
-
-#data = [
-#    ['p'],
-#    ['y'],
-#]
-
-#worksheet.write_column('A1', data[0])
-#worksheet.write_column('B1', data[1])
 
 # Create a new chart object. In this case an embedded chart.
 chart1 = workbook.add_chart({'type': 'column'})
