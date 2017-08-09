@@ -6,39 +6,6 @@ import xlwt
 from random import randint
 #import matplotlib.pyplot as plt
 
-if len(sys.argv) < 2:
-	print ("You must pass a data file like so: python geo.pyworks1 <data file>")
-	sys.exit()
-workbook = open_workbook(sys.argv[1])
-wsindex_question = input('Which sheet would you like to use?  (0 -> first sheet, 1 -> second sheet, etc) ')
-wsindex = int(wsindex_question) 
-worksheet = workbook.sheet_by_index(wsindex)
-first_array = []
-second_array = []
-pcc = []
-geneone= []
-genetwo = []
-repeat = []
-gene_name_question = input('What column are the gene names under: ')
-gene_name_col = int(gene_name_question)
-expression_col_question = input('How many time-points are there?: ')
-expression_col = int(expression_col_question)
-data_col_start_question = input('What is the column number where the data starts?  (A -> 0, B -> 1, etc) ')
-data_col_start = int(data_col_start_question)
-expression_col_a = range(data_col_start, expression_col)
-expression_col_b = list(expression_col_a)
-Expression_Profile_Columns = expression_col_b
-Total_Iteration_Question = input('How many iterations would you like to run?: ')
-Total_Iteration_a = int(Total_Iteration_Question)
-adj_genepair_q = input('How many adjacent gene pairs are in this gene family?: ')
-adj_genepair_a = int(adj_genepair_q)
-debug_output_printing_q = input('Do you want to print EVERY PCC VALUE to an excel file? (Hint:  type 0 if you are doing greater than 65,000 comparison, type 1 for yes) ')
-debug_output_printing = int(debug_output_printing_q)
-
-# Second array value can not be zero for some reason. So instruct user that profile must start on second row
-First_Row_In_Sheet = 1
-Total_Iterations = Total_Iteration_a
-
 def get_array_from_row(row):
 	new_array = []
 
@@ -125,42 +92,78 @@ def output(filename, sheet1, list1):
 		sh.write(m, 2, e3)
 	book.save(filename)
 
+
+## Begin Main Function Here
+if len(sys.argv) < 2:
+        print ("You must pass a data file like so: python geo.pyworks1 <data file>")
+        sys.exit()
+workbook = open_workbook(sys.argv[1])
+wsindex_question = input('Which sheet would you like to use?  (0 -> first sheet, 1 -> second sheet, etc) ')
+wsindex = int(wsindex_question)
+worksheet = workbook.sheet_by_index(wsindex)
+first_array = []
+second_array = []
+pcc = []
+geneone= []
+genetwo = []
+repeat = []
+print("repeat")
+print(repeat)
+gene_name_question = input('What column are the gene names under: ')
+gene_name_col = int(gene_name_question)
+expression_col_question = input('How many time-points are there?: ')
+expression_col = int(expression_col_question)
+data_col_start_question = input('What is the column number where the data starts?  (A -> 0, B -> 1, etc) ')
+data_col_start = int(data_col_start_question)
+expression_col_a = range(data_col_start, expression_col)
+expression_col_b = list(expression_col_a)
+Expression_Profile_Columns = expression_col_b
+Total_Iteration_Question = input('How many iterations would you like to run?: ')
+Total_Iteration_a = int(Total_Iteration_Question)
+adj_genepair_q = input('How many adjacent gene pairs are in this gene family?: ')
+adj_genepair_a = int(adj_genepair_q)
+debug_output_printing_q = input('Do you want to print EVERY PCC VALUE to an excel file? (Hint:  type 0 if you are doing greater than 65,000 comparison, type 1 for yes) ')
+debug_output_printing = int(debug_output_printing_q)
+
+# Second array value can not be zero for some reason. So instruct user that profile must start on second row
+First_Row_In_Sheet = 1
+Total_Iterations = Total_Iteration_a
+
+
+skipped=0
 for count in range(0, Total_Iterations):
-	try:
-                twogene = np.zeros(adj_genepair_a)
+        ## Gene 1
+        random_row = randint(First_Row_In_Sheet, worksheet.nrows-1)
+        first_array = get_array_from_row(random_row)
 
-		random_row = randint(First_Row_In_Sheet, worksheet.nrows - 1)
-                first_array = get_array_from_row(random_row)
-                print(adj_genepair_a) 
-                for gcount in range(0,adj_genepair_a):
-         		random_row2 = randint(First_Row_In_Sheet, worksheet.nrows - 1)
-                        twogene[gcount] = random_row2
-                     
-		        second_array = get_array_from_row(random_row2)
-		        random_row_check = random_row == random_row2
+        twogene = np.zeros(adj_genepair_a,dtype=np.int )
+        print("Gene 1")
+        print(first_array)
+        print("Gene 2 initialized")
+        print(twogene)
+      
+        ## Just fill gene2 with random row numbers
+        for gcount in range(0,adj_genepair_a):
+        	random_row2 = randint(First_Row_In_Sheet, worksheet.nrows-1)
+		twogene[gcount] = random_row2
 
+        ## Now go through gene2 and compute pcc everytime you have an entry 
+        ## that refers to a gene that is not the same as gene1
+        for gcount in range(0,adj_genepair_a):
+		if (random_row != twogene[gcount]):
+		        second_array = get_array_from_row(twogene[gcount])
+			gene1 = worksheet.cell_value(rowx=random_row, colx=(gene_name_col-1))
+			geneone.append(gene1)
+			gene2 = worksheet.cell_value(rowx=twogene[gcount], colx=(gene_name_col-1))
+			genetwo.append(gene2)
+			PCC(first_array, second_array)	
 
-		        if first_array is None or second_array is None:
-			   repeat.append(1)
-			   raise
-		        if random_row_check == 1:
-		           repeat.append(random_row_check)
-			   raise 
-		        gene1 = worksheet.cell_value(rowx=random_row, colx=(gene_name_col -1))
-		        geneone.append(gene1)
-		        gene2 = worksheet.cell_value(rowx=random_row2, colx= (gene_name_col- 1))
-		        genetwo.append(gene2)
-
-		        PCC(first_array, second_array)
-
-	except:
-		Total_Iterations += 0
-		pass
+		else:
+			skipped += 1
 
 
 
-
-print ("Skipped Itterations: " + str(len(repeat)))
+print ("Skipped Itterations: " + str(skipped))
 print ('Workbook Made')
 #histogram = plt.hist(pcc, bins= 100)
 #plt.show()
