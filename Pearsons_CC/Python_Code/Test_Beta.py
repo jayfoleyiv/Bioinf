@@ -4,7 +4,7 @@ import numpy as np
 from xlrd import open_workbook
 import xlwt
 from random import randint
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 def get_array_from_row(row):
 	new_array = []
@@ -120,6 +120,8 @@ expression_col_b = list(expression_col_a)
 Expression_Profile_Columns = expression_col_b
 Total_Iteration_Question = input('How many iterations would you like to run?: ')
 Total_Iteration_a = int(Total_Iteration_Question)
+total_genes_q = input('How many genes in total are in the spreadsheet?: ')
+total_genes_a = int(total_genes_q)
 adj_genepair_q = input('How many adjacent gene pairs are in this gene family?: ')
 adj_genepair_a = int(adj_genepair_q)
 debug_output_printing_q = input('Do you want to print EVERY PCC VALUE to an excel file? (Hint:  type 0 if you are doing greater than 65,000 comparison, type 1 for yes) ')
@@ -132,34 +134,56 @@ Total_Iterations = Total_Iteration_a
 
 skipped=0
 for count in range(0, Total_Iterations):
-        ## Gene 1
-        random_row = randint(First_Row_In_Sheet, worksheet.nrows-1)
-        first_array = get_array_from_row(random_row)
 
-        twogene = np.zeros(adj_genepair_a,dtype=np.int )
-        print("Gene 1")
-        print(first_array)
-        print("Gene 2 initialized")
-        print(twogene)
+       #genes = np.zeros(adj_genepair_a,dtype=np.int)
+        genes = np.random.choice(total_genes_a, adj_genepair_a)
+
+        ## Gene 1
+        #random_row = randint(First_Row_In_Sheet, worksheet.nrows-1)
+        #first_array = get_array_from_row(random_row)
+
+        #twogene = np.zeros(adj_genepair_a,dtype=np.int )
+        #print("Gene 1")
+        #print(first_array)
+        #print("Gene 2 initialized")
+        #print(genes)
       
         ## Just fill gene2 with random row numbers
-        for gcount in range(0,adj_genepair_a):
-        	random_row2 = randint(First_Row_In_Sheet, worksheet.nrows-1)
-		twogene[gcount] = random_row2
+        #for gcount in range(0,adj_genepair_a-1):
+        #	random_row = randint(First_Row_In_Sheet, worksheet.nrows-1)
+	#	genes[gcount] = random_row
 
+        print(genes)
         ## Now go through gene2 and compute pcc everytime you have an entry 
         ## that refers to a gene that is not the same as gene1
-        for gcount in range(0,adj_genepair_a):
-		if (random_row != twogene[gcount]):
-		        second_array = get_array_from_row(twogene[gcount])
-			gene1 = worksheet.cell_value(rowx=random_row, colx=(gene_name_col-1))
-			geneone.append(gene1)
-			gene2 = worksheet.cell_value(rowx=twogene[gcount], colx=(gene_name_col-1))
-			genetwo.append(gene2)
-			PCC(first_array, second_array)	
+        
+        for gcount in range(0, adj_genepair_a-1):
+                w = genes[gcount]
 
-		else:
-			skipped += 1
+                gen = len(genes) 
+                for gcount in range(1, gen):
+                    t = genes[gcount]
+          
+                first_array = get_array_from_row(w)
+                second_array = get_array_from_row(t)
+
+                if w == t:                
+                    skipped += 1
+
+                else:
+                    PCC(first_array, second_array)
+
+		#if (random_row != genes[gcount]):
+    #first_array = get_array_from_row(w)		        
+    #second_array = get_array_from_row(t)
+			#gene1 = worksheet.cell_value(rowx=random_row, colx=(gene_name_col-1))
+			#genes.append(gene1)
+			#gene2 = worksheet.cell_value(rowx=twogene[gcount], colx=(gene_name_col-1))
+			#genes.append(gene2)
+			#PCC(first_array, second_array)	
+                        
+		#else:
+		#	skipped += 1
 
 
 
