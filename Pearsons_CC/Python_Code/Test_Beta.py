@@ -173,6 +173,9 @@ for count in range(0, Total_Iterations):
                 else:
                     PCC(first_array, second_array)
 
+                    np.mean(pcc)
+
+
 		#if (random_row != genes[gcount]):
     #first_array = get_array_from_row(w)		        
     #second_array = get_array_from_row(t)
