@@ -137,7 +137,7 @@ skipped=0
 for count in range(0, Total_Iterations):
 
        #genes = np.zeros(adj_genepair_a,dtype=np.int)
-        genes = np.random.choice(total_genes_a, adj_genepair_a, replace=False)
+        genes = np.random.choice(range(1,total_genes_a), adj_genepair_a, replace=False)
 
         ## Gene 1
         #random_row = randint(First_Row_In_Sheet, worksheet.nrows-1)
@@ -167,11 +167,11 @@ for count in range(0, Total_Iterations):
 
                 gen = len(genes) 
                 for gcount2 in range(gcount1+1, gen):
-                    print("w")
-                    print(w)
-                    print("t")
+                    #print("w")
+                    #print(w)
+                    #print("t")
                     t = genes[gcount2]
-                    print(t) 
+                    #print(t) 
                     first_array = get_array_from_row(w)
                     second_array = get_array_from_row(t)
 
@@ -179,9 +179,11 @@ for count in range(0, Total_Iterations):
                         skipped += 1
 
                     else:
+                        print(first_array)
+                        print(second_array)
                         temp[paircount] = PCC(first_array, second_array)
-                        print(temp)
-                        print(paircount)
+                       #print(temp)
+                       #print(paircount)
                         paircount +=1
                         
 
