@@ -179,8 +179,8 @@ for count in range(0, Total_Iterations):
                         skipped += 1
 
                     else:
-                        print(first_array)
-                        print(second_array)
+                       #print(first_array)
+                       #print(second_array)
                         temp[paircount] = PCC(first_array, second_array)
                        #print(temp)
                        #print(paircount)
@@ -217,7 +217,7 @@ if (debug_output_printing==1):
 
 
 print("Printing PCC Array\n")
-print(pcc)
+#print(pcc)
 rg = len(pcc)
 print(" Printing range\n")
 print(rg)
