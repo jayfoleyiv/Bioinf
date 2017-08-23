@@ -154,7 +154,7 @@ for count in range(0, Total_Iterations):
         #	random_row = randint(First_Row_In_Sheet, worksheet.nrows-1)
 	#	genes[gcount] = random_row
 
-        print(genes)
+        #print(genes)
         ## Now go through gene2 and compute pcc everytime you have an entry 
         ## that refers to a gene that is not the same as gene1
         
