@@ -69,7 +69,8 @@ def PCC(x, y):
 		ProdXY.append(XYProd)
 	SumXY = math.fsum(ProdXY)
 	PCCXY = SumXY / (n- 1)
-	pcc.append(PCCXY)
+	#pcc.append(PCCXY)
+        return PCCXY
 
 	#print (PhiX)
 	#print (PhiY)
@@ -136,7 +137,7 @@ skipped=0
 for count in range(0, Total_Iterations):
 
        #genes = np.zeros(adj_genepair_a,dtype=np.int)
-        genes = np.random.choice(total_genes_a, adj_genepair_a)
+        genes = np.random.choice(total_genes_a, adj_genepair_a, replace=False)
 
         ## Gene 1
         #random_row = randint(First_Row_In_Sheet, worksheet.nrows-1)
@@ -157,23 +158,34 @@ for count in range(0, Total_Iterations):
         ## Now go through gene2 and compute pcc everytime you have an entry 
         ## that refers to a gene that is not the same as gene1
         
-        for gcount in range(0, adj_genepair_a-1):
-                w = genes[gcount]
+
+        numpairs = adj_genepair_a*(adj_genepair_a-1)/2
+        temp = np.zeros(numpairs)
+        paircount = 0
+        for gcount1 in range(0, adj_genepair_a-1):
+                w = genes[gcount1]
 
                 gen = len(genes) 
-                for gcount in range(1, gen):
-                    t = genes[gcount]
-          
-                first_array = get_array_from_row(w)
-                second_array = get_array_from_row(t)
+                for gcount2 in range(gcount1+1, gen):
+                    print("w")
+                    print(w)
+                    print("t")
+                    t = genes[gcount2]
+                    print(t) 
+                    first_array = get_array_from_row(w)
+                    second_array = get_array_from_row(t)
 
-                if w == t:                
-                    skipped += 1
+                    if w == t:                
+                        skipped += 1
 
-                else:
-                    PCC(first_array, second_array)
+                    else:
+                        temp[paircount] = PCC(first_array, second_array)
+                        print(temp)
+                        print(paircount)
+                        paircount +=1
+                        
 
-                    np.mean(pcc)
+                    pcc.append(np.mean(temp))
 
 
 		#if (random_row != genes[gcount]):
@@ -190,7 +202,7 @@ for count in range(0, Total_Iterations):
 
 
 
-print ("Skipped Itterations: " + str(skipped))
+print ("Skipped Iterations: " + str(skipped))
 print ('Workbook Made')
 #histogram = plt.hist(pcc, bins= 100)
 #plt.show()
