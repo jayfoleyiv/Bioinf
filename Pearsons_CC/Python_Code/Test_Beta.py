@@ -162,7 +162,7 @@ for count in range(0, Total_Iterations):
 	#	genes[gcount] = random_row
 
         #print(genes)
-        ## Now go through gene2 and compute pcc everytime you have an entry 
+        ## Now go through gene2 and compute #pcc everytime you have an entry 
         ## that refers to a gene that is not the same as gene1
         
 
@@ -189,13 +189,13 @@ for count in range(0, Total_Iterations):
                        #print(first_array)
                        #print(second_array)
                         temp[paircount] = PCC(first_array, second_array)
-                       #print(temp)
+                        print(temp)
                        #print(paircount)
                         paircount +=1
                         
 
-                    pcc.append(np.mean(temp))
-
+                   # pcc.append(np.mean(temp))
+                    print(np.mean(temp))
 
 		#if (random_row != genes[gcount]):
     #first_array = get_array_from_row(w)		        
