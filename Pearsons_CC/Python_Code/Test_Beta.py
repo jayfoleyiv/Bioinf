@@ -252,40 +252,26 @@ print(p, y)
 import xlsxwriter
 
 workbook = xlsxwriter.Workbook('histogram.sample.xlsx')
-worksheet1 = workbook.add_worksheet()
-worksheet2 = workbook.add_worksheet()
+worksheet1 = workbook.add_worksheet('PCC_Histogram')
 
-row = 0
-col = 0
+row1 = 0
+col1 = 0
 #for item, cost in (data):
 #    worksheet.write(row, col,   item)
 #    worksheet.write(row, col + 1, cost)
 #    row += 1
 
 for item in (y):
-    worksheet1.write(row, col +1, item)
-    row += 1
+    worksheet1.write(row1, col1 +1, item)
+    row1 += 1
 
-row = 0
+row1 = 0
 for item in (p):
-    worksheet1.write(row, col, item)
-    row += 1
+    worksheet1.write(row1, col1, item)
+    row1 += 1
 
-#Randomness_Check graph below
-
-for thing in (selection_array):
-    worksheet2.write(row, col +1, thing)
-    row += 1
-
-for thing in (i):
-    worksheet2.write(row, col, thing)
-    row += 1
-
-worksheet1.write(row, 0, 'Total Iterations')
-worksheet1.write(row, 1, '=SUM(B1:B41)')
-
-worksheet2.write(row, 0, 'Total Choices')
-worksheet2.write(row, 1, '=SUM(B1:B(total_genes_a)')
+worksheet1.write(row1, 0, 'Total Iterations')
+worksheet1.write(row1, 1, '=SUM(B1:B41)')
 
 # An example of creating Excel Line charts with Python and XlsxWriter.
 #
@@ -294,48 +280,64 @@ worksheet2.write(row, 1, '=SUM(B1:B(total_genes_a)')
 # Create a new chart object. In this case an embedded chart.
 chart1 = workbook.add_chart({'type': 'column'})
 
-chart2 = workbook_add_chart({'type': 'column'})
-
 # Configure the first series.
 chart1.add_series({
-    'categories': '=Sheet1!$A$1:$A$41',
-    'values': '=Sheet1!$B$1:$B$41',
+    'categories': '=PCC_Histogram!$A$1:$A$41',
+    'values': '=PCC_Histogram!$B$1:$B$41',
 })
-
-chart2.add_series({
-    'geneno.' : '=Sheet1!$A$1:$A$total_genes_a',
-    'freq.' : '=Sheet1!$B$1:$B$total_genes_a',
-})
-
 
 # Add a chart title and some axis labels.
 chart1.set_title ({'name': 'Histogram'})
 chart1.set_x_axis({'name': 'PCC'})
 chart1.set_y_axis({'name': 'Number of Gene Pairs'})
 
-chart2.set_title ({'name': 'Randomness Check'})
-chart2.set_x_axis({'name': 'Gene Number'})
-chart2.set_y_axis({'name': 'Frequency'})
-
-
 # Set an Excel chart style. Colors with white outline and shadow.
 chart1.set_style(11)
-
-chart2.set.style(10)
 
 # Insert the chart into the worksheet (with an offset).
 worksheet1.insert_chart('D2', chart1, {'x_offset': 25, 'y_offset': 10})
 
 chart2 = workbook.add_chart({'type': 'column', 'subtype': 'clustered'})
 
+workbook.close()
+
+#2nd histogram below
+
+worksheet2 = workbook.add_worksheet('Randomness_Check')
+
+row2 = 0
+col2 = 0
+
+for thing in (selection_array):
+    worksheet2.write(row2, col2 +1, thing)
+    row2 += 1
+
+row2 = 0
+for thing in (genes):
+    worksheet2.write(row2, col2, thing)
+    row2 += 1
+
+worksheet2.write(row2, 0, 'Total Choices')
+worksheet2.write(row2, 1, '=SUM(B1:B(total_genes_a)')
+
+chart12 = workbook.add_chart({'type': 'column'})
+
+chart12.add_series({
+    'categories' : '=Randomness_Check!$A$1:$A$total_genes_a',
+    'values' : '=Randomness_Check1!$B$1:$B$total_genes_a',
+})
+
+chart2.set_title ({'name': 'Randomness Check'})
+chart2.set_x_axis({'name': 'Gene Number'})
+chart2.set_y_axis({'name': 'Frequency'})
+
+#chart2.set.style(10)
 
 worksheet2.insert_chart('D2', chart2, {'x_offset': 25, 'y_offset': 10})
 
 chart3 = workbook.add_chart({'type': 'column', 'subtype': 'clustered'})
 
 workbook.close()
-
-
 
 #print(histogram)
 
