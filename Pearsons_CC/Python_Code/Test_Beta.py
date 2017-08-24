@@ -195,7 +195,10 @@ for count in range(0, Total_Iterations):
                         
 
                    # pcc.append(np.mean(temp))
-                    print(np.mean(temp))
+        h = np.mean(temp)
+        pcc.append(h)
+        print(np.mean(temp))
+        print(pcc)
 
 		#if (random_row != genes[gcount]):
     #first_array = get_array_from_row(w)		        
