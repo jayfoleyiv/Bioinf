@@ -299,8 +299,6 @@ worksheet1.insert_chart('D2', chart1, {'x_offset': 25, 'y_offset': 10})
 
 chart2 = workbook.add_chart({'type': 'column', 'subtype': 'clustered'})
 
-workbook.close()
-
 #2nd histogram below
 
 worksheet2 = workbook.add_worksheet('Randomness_Check')
@@ -320,9 +318,9 @@ for thing in (genes):
 worksheet2.write(row2, 0, 'Total Choices')
 worksheet2.write(row2, 1, '=SUM(B1:B(total_genes_a)')
 
-chart12 = workbook.add_chart({'type': 'column'})
+chart2 = workbook.add_chart({'type': 'column'})
 
-chart12.add_series({
+chart2.add_series({
     'categories' : '=Randomness_Check!$A$1:$A$total_genes_a',
     'values' : '=Randomness_Check1!$B$1:$B$total_genes_a',
 })
