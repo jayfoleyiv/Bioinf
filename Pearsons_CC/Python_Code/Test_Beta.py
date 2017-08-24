@@ -134,10 +134,17 @@ Total_Iterations = Total_Iteration_a
 
 
 skipped=0
+
+selection_array = np.zeros(total_genes_a)
+
 for count in range(0, Total_Iterations):
 
        #genes = np.zeros(adj_genepair_a,dtype=np.int)
         genes = np.random.choice(range(1,total_genes_a), adj_genepair_a, replace=False)
+
+        for i in range(len(genes)):
+            selection_array[genes[i]] += 1
+ 
 
         ## Gene 1
         #random_row = randint(First_Row_In_Sheet, worksheet.nrows-1)
@@ -240,10 +247,13 @@ print(p, y)
 
 
 
+
+
 import xlsxwriter
 
 workbook = xlsxwriter.Workbook('histogram.sample.xlsx')
-worksheet = workbook.add_worksheet()
+worksheet1 = workbook.add_worksheet()
+worksheet2 = workbook.add_worksheet()
 
 row = 0
 col = 0
@@ -253,17 +263,29 @@ col = 0
 #    row += 1
 
 for item in (y):
-    worksheet.write(row, col +1, item)
+    worksheet1.write(row, col +1, item)
     row += 1
 
 row = 0
 for item in (p):
-    worksheet.write(row, col, item)
+    worksheet1.write(row, col, item)
     row += 1
 
+#Randomness_Check graph below
 
-worksheet.write(row, 0, 'Total Iterations')
-worksheet.write(row, 1, '=SUM(B1:B41)')
+for thing in (selection_array):
+    worksheet2.write(row, col +1, thing)
+    row += 1
+
+for thing in (i):
+    worksheet2.write(row, col, thing)
+    row += 1
+
+worksheet1.write(row, 0, 'Total Iterations')
+worksheet1.write(row, 1, '=SUM(B1:B41)')
+
+worksheet2.write(row, 0, 'Total Choices')
+worksheet2.write(row, 1, '=SUM(B1:B(total_genes_a)')
 
 # An example of creating Excel Line charts with Python and XlsxWriter.
 #
@@ -272,24 +294,44 @@ worksheet.write(row, 1, '=SUM(B1:B41)')
 # Create a new chart object. In this case an embedded chart.
 chart1 = workbook.add_chart({'type': 'column'})
 
+chart2 = workbook_add_chart({'type': 'column'})
+
 # Configure the first series.
 chart1.add_series({
     'categories': '=Sheet1!$A$1:$A$41',
     'values': '=Sheet1!$B$1:$B$41',
 })
 
+chart2.add_series({
+    'geneno.' : '=Sheet1!$A$1:$A$total_genes_a',
+    'freq.' : '=Sheet1!$B$1:$B$total_genes_a',
+})
+
+
 # Add a chart title and some axis labels.
 chart1.set_title ({'name': 'Histogram'})
 chart1.set_x_axis({'name': 'PCC'})
 chart1.set_y_axis({'name': 'Number of Gene Pairs'})
 
+chart2.set_title ({'name': 'Randomness Check'})
+chart2.set_x_axis({'name': 'Gene Number'})
+chart2.set_y_axis({'name': 'Frequency'})
+
+
 # Set an Excel chart style. Colors with white outline and shadow.
 chart1.set_style(11)
 
+chart2.set.style(10)
+
 # Insert the chart into the worksheet (with an offset).
-worksheet.insert_chart('D2', chart1, {'x_offset': 25, 'y_offset': 10})
+worksheet1.insert_chart('D2', chart1, {'x_offset': 25, 'y_offset': 10})
 
 chart2 = workbook.add_chart({'type': 'column', 'subtype': 'clustered'})
+
+
+worksheet2.insert_chart('D2', chart2, {'x_offset': 25, 'y_offset': 10})
+
+chart3 = workbook.add_chart({'type': 'column', 'subtype': 'clustered'})
 
 workbook.close()
 
