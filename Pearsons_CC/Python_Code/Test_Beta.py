@@ -189,7 +189,7 @@ for count in range(0, Total_Iterations):
                        #print(first_array)
                        #print(second_array)
                         temp[paircount] = PCC(first_array, second_array)
-                        print(temp)
+                       #print(temp)
                        #print(paircount)
                         paircount +=1
                         
@@ -197,8 +197,8 @@ for count in range(0, Total_Iterations):
                    # pcc.append(np.mean(temp))
         h = np.mean(temp)
         pcc.append(h)
-        print(np.mean(temp))
-        print(pcc)
+        #print(np.mean(temp))
+        #print(pcc)
 
 		#if (random_row != genes[gcount]):
     #first_array = get_array_from_row(w)		        
