@@ -315,8 +315,8 @@ for thing in (genes):
     worksheet2.write(row2, col2, thing)
     row2 += 1
 
-worksheet2.write(row2, 0, 'Total Choices')
-worksheet2.write(row2, 1, '=SUM(B1:B(total_genes_a)')
+#worksheet2.write(row2, 0, 'Total Choices')
+#worksheet2.write(row2, 1, '=SUM(B1:B(total_genes_a)')
 
 chart2 = workbook.add_chart({'type': 'column'})
 
