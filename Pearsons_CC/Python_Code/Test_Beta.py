@@ -329,8 +329,8 @@ for thing in (genes):
 chart2 = workbook.add_chart({'type': 'column'})
 
 chart2.add_series({
-    'categories' : '=Randomness_Check!$A$1:$A$83',
-    'values' : '=Randomness_Check!$B$1:$B$83',
+    'categories' : '=Randomness_Check!$A$1:$A$84',
+    'values' : '=Randomness_Check!$B$1:$B$84',
 })
 
 chart2.set_title ({'name': 'Randomness Check'})
@@ -352,7 +352,5 @@ workbook.close()
 #x = [ 0.000000, -0.128000, -0.097000, -0.020000, -0.272000, -0.198000, -0.333000]
 #y = [ 0.775000, 0.849000, 0.518000, 0.116000, -0.076000, -0.090000, 0.102000]
 #PCC(x, y)
-
-
 
 
