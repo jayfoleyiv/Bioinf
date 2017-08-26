@@ -290,8 +290,8 @@ chart1 = workbook.add_chart({'type': 'column'})
 
 # Configure the first series.
 chart1.add_series({
-    'categories': '=PCC_Histogram!$A$1:$A$41',
-    'values': '=PCC_Histogram!$B$1:$B$41',
+    'categories': '=PCC_Histogram!$A$1:$A$1000',
+    'values': '=PCC_Histogram!$B$1:$B$1000',
 })
 
 # Add a chart title and some axis labels.
