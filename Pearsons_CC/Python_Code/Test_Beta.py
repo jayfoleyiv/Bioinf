@@ -279,7 +279,7 @@ for item in (p):
     row1 += 1
 
 worksheet1.write(row1, 0, 'Total Iterations')
-worksheet1.write(row1, 1, '=SUM(B1:B41)')
+worksheet1.write(row1, 1, '=SUM(B1:B1000)')
 
 # An example of creating Excel Line charts with Python and XlsxWriter.
 #
@@ -330,7 +330,7 @@ chart2 = workbook.add_chart({'type': 'column'})
 
 chart2.add_series({
     'categories' : '=Randomness_Check!$A$1:$A$1000',
-    'values' : '=Randomness_Check1!$B$1:$B$1000',
+    'values' : '=Randomness_Check!$B$1:$B$1000',
 })
 
 chart2.set_title ({'name': 'Randomness Check'})
