@@ -28,6 +28,8 @@ data_col_start = int(data_col_start_question)
 expression_col_a = range(data_col_start, expression_col)
 expression_col_b = list(expression_col_a)
 Expression_Profile_Columns = expression_col_b
+bin_size_q = input('What is the preferred bin size?: ')
+bin_size_a = (2/(int(bin_size_q))+1)
 Total_Iteration_Question = input('How many iterations would you like to run?: ')
 Total_Iteration_a = int(Total_Iteration_Question)
 adj_genepair_q = input('How many adjacent gene pairs are in this gene family?: ')
@@ -178,7 +180,7 @@ rg = len(pcc)
 print(" Printing range\n")
 print(rg)
  
-p=np.linspace(-1, 1, 41, endpoint=True)
+p=np.linspace(-1, 1, bin_size_a, endpoint=True)
 N=41
 y = np.zeros(N)
 prg = len(p)

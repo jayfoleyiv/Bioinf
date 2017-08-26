@@ -119,6 +119,8 @@ data_col_start = int(data_col_start_question)
 expression_col_a = range(data_col_start, expression_col)
 expression_col_b = list(expression_col_a)
 Expression_Profile_Columns = expression_col_b
+bin_size_q = input('What is the preferred bin size?: ')
+bin_size_a = (float(bin_size_q))
 Total_Iteration_Question = input('How many iterations would you like to run?: ')
 Total_Iteration_a = int(Total_Iteration_Question)
 total_genes_q = input('How many genes in total are in the spreadsheet?: ')
@@ -231,9 +233,12 @@ print("Printing PCC Array\n")
 rg = len(pcc)
 print(" Printing range\n")
 print(rg)
- 
-p=np.linspace(-1, 1, 41, endpoint=True)
-N=41
+
+print(bin_size_a)
+w = 2/bin_size_a
+e = w+1 
+p=np.linspace(-1, 1, e, endpoint=True)
+N=e
 y = np.zeros(N)
 prg = len(p)
 
@@ -324,8 +329,8 @@ for thing in (genes):
 chart2 = workbook.add_chart({'type': 'column'})
 
 chart2.add_series({
-    'categories' : '=Randomness_Check!$A$1:$A$total_genes_a',
-    'values' : '=Randomness_Check1!$B$1:$B$total_genes_a',
+    'categories' : '=Randomness_Check!$A$1:$A$1000',
+    'values' : '=Randomness_Check1!$B$1:$B$1000',
 })
 
 chart2.set_title ({'name': 'Randomness Check'})
