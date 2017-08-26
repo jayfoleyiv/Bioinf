@@ -290,8 +290,8 @@ chart1 = workbook.add_chart({'type': 'column'})
 
 # Configure the first series.
 chart1.add_series({
-    'categories': '=PCC_Histogram!$A$1:$A$1000',
-    'values': '=PCC_Histogram!$B$1:$B$1000',
+    'categories': '=PCC_Histogram!$A$1:$A$401',
+    'values': '=PCC_Histogram!$B$1:$B$401',
 })
 
 # Add a chart title and some axis labels.
@@ -329,8 +329,8 @@ for thing in (genes):
 chart2 = workbook.add_chart({'type': 'column'})
 
 chart2.add_series({
-    'categories' : '=Randomness_Check!$A$1:$A$1000',
-    'values' : '=Randomness_Check!$B$1:$B$1000',
+    'categories' : '=Randomness_Check!$A$1:$A$83',
+    'values' : '=Randomness_Check!$B$1:$B$83',
 })
 
 chart2.set_title ({'name': 'Randomness Check'})
