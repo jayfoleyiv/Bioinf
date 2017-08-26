@@ -279,7 +279,7 @@ for item in (p):
     row1 += 1
 
 worksheet1.write(row1, 0, 'Total Iterations')
-worksheet1.write(row1, 1, '=SUM(B1:B1000)')
+worksheet1.write(row1, 1, '=SUM(B1:B401)')
 
 # An example of creating Excel Line charts with Python and XlsxWriter.
 #
@@ -323,8 +323,8 @@ for thing in (genes):
     worksheet2.write(row2, col2, thing)
     row2 += 1
 
-#worksheet2.write(row2, 0, 'Total Choices')
-#worksheet2.write(row2, 1, '=SUM(B1:B(total_genes_a)')
+worksheet2.write(row2, 0, 'Total Choices')
+worksheet2.write(row2, 1, '=SUM(B1:B83')
 
 chart2 = workbook.add_chart({'type': 'column'})
 
