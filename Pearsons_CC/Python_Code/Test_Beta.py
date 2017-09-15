@@ -330,8 +330,8 @@ chart2 = workbook.add_chart({'type': 'column'})
 
 chart2.add_series({
 
-    'categories' : '=Randomness_Check!$A$1:$A$173',
-    'values' : '=Randomness_Check!$B$1:$B$173',
+    'categories' : '=Randomness_Check!$A$1:$A$172',
+    'values' : '=Randomness_Check!$B$1:$B$172',
 })
 
 chart2.set_title ({'name': 'Randomness Check'})
