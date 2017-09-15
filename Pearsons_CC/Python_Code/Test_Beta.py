@@ -319,7 +319,7 @@ for thing in (selection_array):
     row2 += 1
 
 row2 = 0
-for thing in (genes):
+for thing in (selection_array):
     worksheet2.write(row2, col2, thing)
     row2 += 1
 
