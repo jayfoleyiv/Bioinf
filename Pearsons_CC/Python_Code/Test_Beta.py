@@ -294,9 +294,27 @@ worksheet1.write(row1, 1, '=SUM(B1:B401)')
 chart1 = workbook.add_chart({'type': 'column'})
 
 # Configure the first series.
+
+array = range(1, total_genes_a+1)
+#str0 = "A"
+str1_start = "A$" + str(array[1])
+str1_end = ":A$" + str(array[total_genes_a-1])
+fullstring1 = str1_start + str1_end
+print(str1_start)
+print(str1_end)
+print(fullstring1)
+
+#str2 = "B"
+str2_start = "B$" + str(array[1])
+str2_end = ":B$" + str(array[total_genes_a-1])
+fullstring2 = str2_start + str2_end
+print(str2_start)
+print(str2_end)
+print(fullstring2)
+
 chart1.add_series({
-    'categories': '=PCC_Histogram!$A$1:$A$401',
-    'values': '=PCC_Histogram!$B$1:$B$401',
+    'categories': ['PCC_Histogram', fullstring1],
+    'values': ['PCC_Histogram', fullstring2],
 })
 
 # Add a chart title and some axis labels.
@@ -324,7 +342,7 @@ for thing in (selection_array):
     row2 += 1
 
 row2 = 0
-for thing in (selection_array):
+for thing in (genes):
     worksheet2.write(row2, col2, thing)
     row2 += 1
 
