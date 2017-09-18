@@ -20,6 +20,11 @@ def get_array_from_row(row):
 
 def PCC(x, y):
 #make phi(X)
+        #print("going to compute PCC between vectors x and y")
+        #print("x is ")
+        #print(x)
+        #print("y is ")
+        #print(y)
 	n = len(x)
 	pDifX = []
 	PpowX = []
