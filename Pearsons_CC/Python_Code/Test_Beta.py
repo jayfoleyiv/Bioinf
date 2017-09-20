@@ -305,16 +305,16 @@ print(str1_end)
 print(fullstring1)
 
 #str2 = "B"
-str2_start = "B$" + str(array[1])
-str2_end = ":B$" + str(array[total_genes_a-1])
-fullstring2 = str2_start + str2_end
-print(str2_start)
-print(str2_end)
-print(fullstring2)
+#str2_start = "B$" + str(array[1])
+#str2_end = ":B$" + str(array[total_genes_a-1])
+#fullstring2 = str2_start + str2_end
+#print(str2_start)
+#print(str2_end)
+#print(fullstring2)
 
 chart1.add_series({
-    'categories': ['PCC_Histogram', fullstring1],
-    'values': ['PCC_Histogram', fullstring2],
+    'categories': '=PCC_Histogram!A$1:$A93',
+    'values': '=PCC_Histogram!$B$1:$B$93',
 })
 
 # Add a chart title and some axis labels.
