@@ -295,14 +295,14 @@ chart1 = workbook.add_chart({'type': 'column'})
 
 # Configure the first series.
 
-array = range(1, total_genes_a+1)
+#array = range(1, total_genes_a+1)
 #str0 = "A"
-str1_start = "A$" + str(array[1])
-str1_end = ":A$" + str(array[total_genes_a-1])
-fullstring1 = str1_start + str1_end
-print(str1_start)
-print(str1_end)
-print(fullstring1)
+#str1_start = "A$" + str(array[1])
+#str1_end = ":A$" + str(array[total_genes_a-1])
+#fullstring1 = str1_start + str1_end
+#print(str1_start)
+#print(str1_end)
+#print(fullstring1)
 
 #str2 = "B"
 #str2_start = "B$" + str(array[1])
@@ -313,7 +313,7 @@ print(fullstring1)
 #print(fullstring2)
 
 chart1.add_series({
-    'categories': '=PCC_Histogram!A$1:$A93',
+    'categories': '=PCC_Histogram!$A$1:$A$93',
     'values': '=PCC_Histogram!$B$1:$B$93',
 })
 
