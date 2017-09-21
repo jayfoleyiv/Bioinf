@@ -148,6 +148,9 @@ for count in range(0, Total_Iterations):
 
        #genes = np.zeros(adj_genepair_a,dtype=np.int)
         genes = np.random.choice(range(1,total_genes_a), adj_genepair_a, replace=False)
+        #sel_array = [None] * total_genes_q
+        #sa = len(sel_array)
+        #print(sa)
 
         for i in range(len(genes)):
             selection_array[genes[i]] += 1
@@ -313,8 +316,8 @@ chart1 = workbook.add_chart({'type': 'column'})
 #print(fullstring2)
 
 chart1.add_series({
-    'categories': '=PCC_Histogram!$A$1:$A$93',
-    'values': '=PCC_Histogram!$B$1:$B$93',
+    'categories': '=PCC_Histogram!$A$1:$A$401',
+    'values': '=PCC_Histogram!$B$1:$B$401',
 })
 
 # Add a chart title and some axis labels.
@@ -352,8 +355,8 @@ for thing in (genes):
 chart2 = workbook.add_chart({'type': 'column'})
 
 chart2.add_series({
-    'categories' : '=Randomness_Check!$A$1:$A$168',
-    'values' : '=Randomness_Check!$B$1:$B$168',
+    'categories' : '=Randomness_Check!$A$1:$A$93',
+    'values' : '=Randomness_Check!$B$1:$B$93',
 })
 
 chart2.set_title ({'name': 'Randomness Check'})
