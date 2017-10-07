@@ -355,8 +355,8 @@ for thing in (genes):
 chart2 = workbook.add_chart({'type': 'column'})
 
 chart2.add_series({
-    'categories' : '=Randomness_Check!$A$1:$A$17',
-    'values' : '=Randomness_Check!$B$1:$B$17',
+    'categories' : '=Randomness_Check!$A$1:$A$45',
+    'values' : '=Randomness_Check!$B$1:$B$45',
 })
 
 chart2.set_title ({'name': 'Randomness Check'})
